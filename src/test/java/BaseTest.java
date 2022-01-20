@@ -9,6 +9,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BaseTest {
 
     static Playwright playwright;
@@ -62,6 +63,5 @@ public class BaseTest {
     @AfterEach
     void closeContext() {
         context.close();
-        playwright.close();
     }
 }

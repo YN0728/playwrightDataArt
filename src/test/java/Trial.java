@@ -21,7 +21,7 @@ public class Trial extends BaseTest {
     void searchAmongCelebs() {
         final int order = 0;
         final String celebrity = "Gor Vardanyan";
-        page.pause(); //opens browser inspector
+//        page.pause(); //opens browser inspector
         page.click("id=iconContext-arrow-drop-down");
         page.click("[id='navbar-search-category-select-contents'] [class*='ipc-icon ipc-icon--people']");
         page.type("[id='suggestion-search']", celebrity);
@@ -48,7 +48,7 @@ public class Trial extends BaseTest {
         assertEquals("All", text);
 
         String content = page.textContent("[class^=\"SlideCaption__WithPeekCaptionHeadingText\"] >> nth=1");
-        assertTrue(content.contains("Moon Knight"));
+        assertTrue(content.contains("The Lord of the Rings"));
 
 //        boolean checked = page.isChecked("[id='anyCheckboxHere']");
 //        assertTrue(checked);

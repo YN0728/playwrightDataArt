@@ -16,27 +16,35 @@ public class BaseTest {
     static ThreadLocal<Playwright> playwright = new ThreadLocal<>();
     static ThreadLocal<Browser> browser = new ThreadLocal<>();
 
-    @BeforeAll
-    static void launchBrowser() {
-        playwright.set(Playwright.create());
-        browser.set(playwright.get().chromium().launch(new BrowserType.LaunchOptions()
-                .setHeadless(false)
-//                .setDevtools(true)
-                .setSlowMo(50)));
-    }
-
-    // New instance for each test method.
+//    @BeforeAll
+//    static void launchBrowser() {
+//        playwright.set(Playwright.create());
+//        browser.set(playwright.get().chromium().launch(new BrowserType.LaunchOptions()
+//                .setHeadless(false)
+//                .setSlowMo(50)));
+//    }
+//
+//    // New instance for each test method.
     ThreadLocal<BrowserContext> context = new ThreadLocal<>();
     ThreadLocal<Page> page = new ThreadLocal<>();
+
+//
+//    @AfterAll
+//    static void closeBrowser() {
+//        playwright.get().close();
+//    }
 
     @BeforeEach
     void createContextAndPage() {
 
+        playwright.set(Playwright.create());
+        browser.set(playwright.get().chromium().launch(new BrowserType.LaunchOptions()
+                .setHeadless(false)
+                .setSlowMo(50)));
+
         context.set(browser.get().newContext(new Browser.NewContextOptions()
                 .setViewportSize(1786, 990)
                 .setDeviceScaleFactor(3)
-//                .setIsMobile(true)
-//                .setHasTouch(true)
                 .setRecordVideoDir(Paths.get("videos/"))
                 .setRecordVideoSize(1786, 990)
                 .setPermissions(Arrays.asList("geolocation"))
@@ -54,6 +62,7 @@ public class BaseTest {
     void closeContext() {
         context.get().close();
         playwright.get().close();
+
     }
 }
 

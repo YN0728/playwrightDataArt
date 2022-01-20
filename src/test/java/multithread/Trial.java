@@ -26,7 +26,6 @@ public class Trial extends BaseTest {
     void searchAmongCelebs() {
         final int order = 0;
         final String celebrity = "Gor Vardanyan";
-//        page.pause(); //opens browser inspector
         page.get().click("id=iconContext-arrow-drop-down");
         page.get().click("[id='navbar-search-category-select-contents'] [class*='ipc-icon ipc-icon--people']");
         page.get().type("[id='suggestion-search']", celebrity);
@@ -45,19 +44,13 @@ public class Trial extends BaseTest {
 
     @Test
     void viewAssertions(){
-//        https://playwright.dev/java/docs/assertions
-
         final String filter = "[for='navbar-search-category-select']";
         String text = page.get().innerText(filter);
         assertEquals("All", text);
 
         String content = page.get().textContent("[class^=\"SlideCaption__WithPeekCaptionHeadingText\"] >> nth=1");
-        assertTrue(content.contains("Moon Knight"));
+        assertTrue(content.contains("The Lord of the Rings"));
 
-//        boolean checked = page.isChecked("[id='suggestion-search']");
-//        assertTrue(checked);
-
-        page.get().locator("id='iconContext-menu'").waitFor();
         boolean visible = page.get().isVisible("id='iconContext-menu'");
         assertFalse(visible);
 
